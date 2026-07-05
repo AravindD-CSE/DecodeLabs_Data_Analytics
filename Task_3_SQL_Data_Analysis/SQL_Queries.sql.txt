@@ -1,0 +1,102 @@
+-- =====================================================
+-- DecodeLabs Internship
+-- Task 3 - SQL Data Analysis
+-- Author : Aravind
+-- =====================================================
+
+-- Create Database
+CREATE DATABASE decodelabs_project3;
+
+-- Use Database
+USE decodelabs_project3;
+
+-- Create Orders Table
+CREATE TABLE orders (
+    OrderID VARCHAR(20),
+    Date DATE,
+    CustomerID VARCHAR(20),
+    Product VARCHAR(50),
+    Quantity INT,
+    UnitPrice DECIMAL(10,2),
+    ShippingAddress VARCHAR(255),
+    PaymentMethod VARCHAR(50),
+    OrderStatus VARCHAR(30),
+    TrackingNumber VARCHAR(30),
+    ItemsInCart INT,
+    CouponCode VARCHAR(20),
+    ReferralSource VARCHAR(50),
+    TotalPrice DECIMAL(10,2)
+);
+
+-- Display All Records
+SELECT * FROM orders;
+
+-- Display Selected Columns
+SELECT OrderID, Product, TotalPrice
+FROM orders;
+
+-- Orders with Total Price Greater Than 2000
+SELECT *
+FROM orders
+WHERE TotalPrice > 2000;
+
+-- Sort by Highest Total Price
+SELECT *
+FROM orders
+ORDER BY TotalPrice DESC;
+
+-- Total Number of Orders
+SELECT COUNT(*) AS TotalOrders
+FROM orders;
+
+-- Average Order Price
+SELECT AVG(TotalPrice) AS AveragePrice
+FROM orders;
+
+-- Highest Order Price
+SELECT MAX(TotalPrice) AS HighestPrice
+FROM orders;
+
+-- Lowest Order Price
+SELECT MIN(TotalPrice) AS LowestPrice
+FROM orders;
+
+-- Total Sales
+SELECT SUM(TotalPrice) AS TotalSales
+FROM orders;
+
+-- Product Wise Orders
+SELECT Product,
+COUNT(*) AS TotalOrders
+FROM orders
+GROUP BY Product;
+
+-- Payment Method Analysis
+SELECT PaymentMethod,
+COUNT(*) AS TotalPayments
+FROM orders
+GROUP BY PaymentMethod;
+
+-- Order Status Analysis
+SELECT OrderStatus,
+COUNT(*) AS TotalOrders
+FROM orders
+GROUP BY OrderStatus;
+
+-- Product Wise Average Price
+SELECT Product,
+AVG(TotalPrice) AS AveragePrice
+FROM orders
+GROUP BY Product;
+
+-- Top 10 Highest Orders
+SELECT *
+FROM orders
+ORDER BY TotalPrice DESC
+LIMIT 10;
+
+-- Referral Source Analysis
+SELECT ReferralSource,
+COUNT(*) AS TotalCustomers
+FROM orders
+GROUP BY ReferralSource;
